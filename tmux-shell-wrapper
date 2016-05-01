@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# homebrew doesn't announce where it is in the
+# environment variable
+# so we're going to assume that reattach-to-user-namespace
+
+case "`uname`" in
+    [dD]arwin)
+        if [ -f /usr/local/bin/reattach-to-user-namespace ]; then
+            exec /usr/local/bin/reattach-to-user-namespace -l $SHELL
+        else
+            # so this is probably an error because there's no
+            # reattach-to-user-namespace executable in the 
+            # expected location
+            exec $SHELL
+        fi
+        ;;
+    *)
+        exec $SHELL
+        ;;
+esac

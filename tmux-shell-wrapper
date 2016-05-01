@@ -1,8 +1,10 @@
 #!/bin/sh
+set -euf
 
-# homebrew doesn't announce where it is in the
+# homebrew doesn't announce where it is in an
 # environment variable
 # so we're going to assume that reattach-to-user-namespace
+# is in /usr/local/bin
 
 case "`uname`" in
     [dD]arwin)

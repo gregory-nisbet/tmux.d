@@ -1,21 +1,24 @@
 #!/bin/sh
-
-# homebrew doesn't announce where it is in the
-# environment variable
-# so we're going to assume that reattach-to-user-namespace
+set -euf
 
 case "`uname`" in
     [dD]arwin)
         if [ -f /usr/local/bin/reattach-to-user-namespace ]; then
-            exec /usr/local/bin/reattach-to-user-namespace -l $SHELL
+            exec /usr/local/bin/reattach-to-user-namespace -l "$SHELL"
         else
-            # so this is probably an error because there's no
-            # reattach-to-user-namespace executable in the 
-            # expected location
-            exec $SHELL
+            # assuming brew is on the path, we can get the bin directory this way
+            $HOMEBREW_BIN="`brew --prefix`"/bin
+            if [ -f "$HOMEBREW_BIN"/reattach-to-user-namespace ]; then
+                exec "$HOMEBREW_BIN"/reattach-to-user-namespace -l "$SHELL"
+            else
+                # so this is probably an error because there's no
+                # reattach-to-user-namespace executable in the 
+                # expected location or a custom location
+                exec "$SHELL"
+            fi
         fi
         ;;
     *)
-        exec $SHELL
+        exec "$SHELL"
         ;;
 esac

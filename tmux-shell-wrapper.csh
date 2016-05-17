@@ -1,12 +1,12 @@
 #!/bin/csh -f
 
-set shellname = "${SHELL:t}"
+set noglob
 
 switch ("`uname`")
 case ?arwin:
-    exec /usr/local/bin/reattach-to-user-namespace -l "$shellname"
+    exec /usr/local/bin/reattach-to-user-namespace -l "${SHELL:t}"
     breaksw
 default:
-    exec "$shellname"
+    exec "${SHELL:t}"
     breaksw
 endsw

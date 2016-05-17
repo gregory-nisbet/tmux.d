@@ -1,3 +1,8 @@
+# http://stackoverflow.com/questions/8483798/tmux-borders-displayed-as-x-q-instead-of-lines
+# more utf8
+setw -g utf8 on
+set -g status-utf8 on
+
 # use C-a, since it's on the home row and easier to hit than C-b
 #set-option -g prefix C-a
 #unbind-key C-a
@@ -9,14 +14,18 @@ bind-key R source-file ~/.tmux.conf \; display-message "tmux.conf reloaded."
 
 # vi is good
 # setw -g mode-keys vi
-set -g mode-keys emacs
-set -g status-keys emacs
+setw -g mode-keys vi
+set -g status-keys vi 
 
 # mouse behavior
 set -g mouse-utf8 on
 set -g mouse on
 
 set-option -g default-terminal screen-256color
+
+# note that this doesn't actually do the same thing as C-b z
+# still trying to figure out the configuration syntax
+# bind-key b resize-pane -Z
 
 bind-key : command-prompt
 bind-key r refresh-client
@@ -62,8 +71,18 @@ bind-key ] paste-buffer
 bind-key -t vi-copy v begin-selection
 bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
 
+# these are the escape sequences in the C source code
+# 
+# search up and search down
+# C-s
+# bind-key -t vi-copy \022 search-forward
+# C-r
+# bind-key -t vi-copy \023 search-backward
+
 bind-key -t emacs-copy v begin-selection
 bind-key -t emacs-copy y copy-pipe "reattach-to-user-namespace pbcopy"
+
+# convenient keys in emacs copy mode
 
 # Update default binding of `Enter` to also use copy-pipe
 unbind -t vi-copy Enter
@@ -79,9 +98,9 @@ set-window-option -g display-panes-time 1500
 # set-option -g status-fg default
 
 # Status Bar solarized-dark (default)
-# set-option -g status-bg black
-# set-option -g pane-active-border-fg black
-# set-option -g pane-border-fg black
+# set-option -g status-bg white
+# set-option -g pane-active-border-fg white
+# set-option -g pane-border-fg red
 
 # Status Bar solarized-light
 # if-shell "[ \"$COLORFGBG\" = \"11;15\" ]" "set-option -g status-bg white"

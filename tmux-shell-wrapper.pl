@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 use strict;
 use warnings;
 use File::Basename;
@@ -12,6 +12,6 @@ use File::Basename;
 my $shellname = basename($ENV{SHELL});
 
 if ($^O eq 'darwin') {
-    exec '/usr/local/binreattach-to-user-namespace', '-l', $shellname;
+    exec '/usr/local/bin/reattach-to-user-namespace', '-l', $shellname;
 }
 exec $shellname;

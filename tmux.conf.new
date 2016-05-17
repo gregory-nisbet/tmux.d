@@ -7,6 +7,13 @@ set -g status-utf8 on
 #set-option -g prefix C-a
 #unbind-key C-a
 #bind-key C-a send-prefix
+# 
+# use C-g for ergo
+#
+set-option -g prefix C-g
+unbind-key C-g
+bind-key C-g send-prefix
+#
 set -g base-index 1
 
 # Easy config reload

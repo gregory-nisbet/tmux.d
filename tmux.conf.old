@@ -8,10 +8,12 @@ set -g status-keys emacs
 
 # tmux 2.1 and above
 set -g mouse on
+# from maximum-awesome
+set -g mouse-utf8 on
 
 set -g default-terminal "screen-256color"
 # don't allow rename
-# set-option -g allow-rename off
+set-option -g allow-rename off
 
 # makes cursor visible in emacs inside tmux
 # http://superuser.com/questions/935181/emacs-cursor-is-invisible-in-tmux-in-iterm2
